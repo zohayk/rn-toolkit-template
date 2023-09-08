@@ -1,0 +1,8 @@
+{
+  "name": "rn-toolkit-template",
+  "version": "0.1.0",
+  "description": "React Native TypeScript Template with Redux Toolkit",
+  "repository": "git@github.com:ZoHayk/rn-toolkit-template.git",
+  "author": "Hayk Zohrabyan",
+  "license": "MIT"
+}
