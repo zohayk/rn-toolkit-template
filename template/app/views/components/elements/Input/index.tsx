@@ -1,111 +1,106 @@
-import React, { useMemo, Fragment, FunctionComponent } from 'react';
-import { TextInput, ViewStyle, TextStyle, KeyboardType } from 'react-native';
-import { View, ViewProps } from '../Views';
+import React, { useMemo, Fragment } from 'react';
+import { TextInput, ViewStyle, TextStyle } from 'react-native';
+import { View, MuffledView } from '../Views';
 import { theme, moderateScale } from 'styles';
-import { isAndroid } from 'utils';
+import { Any } from 'types';
+import { Controller, Control } from 'react-hook-form';
+import { Text } from '../Text';
 
-interface InputProps extends ViewProps {
-  isChat?: boolean;
+interface InputProps {
+  control: Control<Any>;
+  name: string;
 
-  value: string;
-  onChangeText: (value: string) => void;
+  keyboardType?:
+    | 'default'
+    | 'number-pad'
+    | 'decimal-pad'
+    | 'numeric'
+    | 'email-address'
+    | 'phone-pad';
   placeholder?: string;
-  error?: string;
-  keyboardType?: KeyboardType | 'visible-password';
-  forwardedRef?: React.Ref<TextInput>;
+  multiline?: boolean;
 }
 
-export const Input: FunctionComponent<InputProps> = ({
-  isChat,
-  placeholder,
-  value,
-  onChangeText,
-  error,
+export const InputController: React.FunctionComponent<InputProps> = ({
+  control,
+  name,
   keyboardType,
-  forwardedRef,
+  placeholder,
+  multiline,
   ...props
 }) => {
   const renderStyle = useMemo(() => {
     const styles: {
-      view: ViewProps;
+      view: ViewStyle;
       input: ViewStyle & TextStyle;
     } = {
       view: {
-        jc: 'center',
-        br: 10,
-        bw: 0,
-        bg: theme.colors.white,
-        bc: theme.colors.white,
+        justifyContent: 'center',
+        position: 'relative',
+        backgroundColor: theme.colors.white,
+        borderRadius: 10,
+        ...theme.shadow,
       },
       input: {
-        backgroundColor: theme.colors.white,
-        borderRadius: moderateScale(8),
-        height: moderateScale(45),
+        borderRadius: 10,
+        height: moderateScale(50),
         fontSize: moderateScale(18),
-        paddingTop: 0,
-        paddingBottom: 0,
-        color: theme.colors.black,
-        // fontFamily: theme.fonts.Bold,
-        paddingHorizontal: moderateScale(16),
+        fontFamily: theme.fonts.Regular,
+        paddingLeft: moderateScale(20),
+        paddingRight: moderateScale(20),
+        paddingVertical: moderateScale(13),
       },
     };
 
-    if (isChat) {
-      styles.input.height = moderateScale(35);
-      styles.input.backgroundColor = theme.colors.concrete;
-      styles.input.fontSize = moderateScale(16);
-      styles.input.fontFamily = theme.fonts.Regular;
-      styles.input.borderWidth = moderateScale(1);
-      styles.input.borderColor = theme.colors.alto;
+    if (multiline) {
+      styles.input.height = '100%';
+      styles.view.height = moderateScale(150);
     }
-    // if (error) {
-    //   styles.view.borderWidth = moderateScale(1);
-    //   styles.view.borderColor = theme.colors.thunderBird;
-    // }
 
     return styles;
-  }, [error, isChat]);
+  }, [multiline]);
 
   return (
-    <Fragment>
-      <View style={renderStyle.view} {...props}>
-        <TextInput
-          value={value}
-          onChangeText={onChangeText}
-          placeholder={placeholder}
-          secureTextEntry={false}
-          autoCorrect={false}
-          autoCapitalize="none"
-          onFocus={() => false}
-          onBlur={() => false}
-          style={renderStyle.input}
-          placeholderTextColor={theme.colors.alto}
-          ref={forwardedRef}
-          keyboardType={keyboardType || (isAndroid ? 'visible-password' : 'default')}
-        />
-
-        {/*{!!error && (*/}
-        {/*  <View style={renderStyle.exclamation}>*/}
-        {/*    /!*<Image source={require('views/assets/icons/exclamationMark.png')} />*!/*/}
-        {/*  </View>*/}
-        {/*)}*/}
-      </View>
-      {/*{!!error && (*/}
-      {/*  <View pl="20@ms0.3" pt="10@ms0.3">*/}
-      {/*    <Text fs="18@ms0.3" color={theme.colors.thunderBird}>*/}
-      {/*      {error}*/}
-      {/*    </Text>*/}
-      {/*  </View>*/}
-      {/*)}*/}
-    </Fragment>
+    <View {...props}>
+      <Controller
+        control={control}
+        name={name}
+        render={({ field: { onChange, value }, fieldState }) => (
+          <Fragment>
+            <MuffledView style={renderStyle.view}>
+              <TextInput
+                keyboardType={keyboardType}
+                placeholder={placeholder}
+                value={value}
+                onChangeText={onChange}
+                multiline={multiline}
+                underlineColorAndroid="transparent"
+                secureTextEntry={false}
+                autoCorrect={false}
+                autoCapitalize="none"
+                textAlignVertical="top"
+                onFocus={() => false}
+                onBlur={() => false}
+                style={renderStyle.input}
+                placeholderTextColor={theme.colors.black}
+              />
+            </MuffledView>
+            {fieldState.error?.message && (
+              <View pl={20} pt={10}>
+                <Text fs={18} color={theme.colors.pomegranate}>
+                  {fieldState.error.message}
+                </Text>
+              </View>
+            )}
+          </Fragment>
+        )}
+      />
+    </View>
   );
 };
 
-export const InputRef = React.forwardRef((props: InputProps, ref?: React.Ref<TextInput>) => (
-  <Input {...props} forwardedRef={ref} />
-));
-
-Input.defaultProps = {
-  error: '',
-  keyboardType: undefined,
+InputController.defaultProps = {
+  multiline: false,
+  placeholder: '',
+  keyboardType: 'default',
 };

@@ -1,54 +1,65 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { StyleSheet, Pressable } from 'react-native';
-import { View } from '../Views';
+import { useSelector } from 'react-redux';
+import { View, ViewProps } from '../Views';
 import BaseModal from 'react-native-modal';
-import { ReactChildren } from 'types';
+import { ReactChildren, Any, RootState } from 'types';
+import { ScreenWidth, ScreenHeight, isAndroid } from 'utils';
+import { theme } from 'styles';
 
-interface ModalProps extends ReactChildren {
+interface ModalProps extends ReactChildren, ViewProps {
   isVisible: boolean;
   setIsVisible: (arg: boolean) => void;
-  isTop?: boolean;
-  isSwipeable?: boolean;
-  isBottom?: boolean;
+  isSwipe?: boolean;
+
+  animationInTiming?: number;
+  animationIn?: Any;
+  animationOut?: Any;
 }
 
 export const Modal: FunctionComponent<ModalProps> = ({
   children,
   isVisible,
   setIsVisible,
-  isTop,
-  isBottom,
-  isSwipeable,
+  isSwipe,
+
+  animationInTiming,
+  animationIn,
+  animationOut,
+  ...props
 }) => {
-  const justifyContent = useMemo(() => {
-    if (isBottom) {
-      return 'flex-end';
+  const isLandscape = useSelector((state: RootState) => state.app.isLandscape);
+
+  // This fixes an error that occurs due to statusBarTranslucent={true}
+  const widthHeightAndroid = useMemo(() => {
+    if (isAndroid) {
+      return { deviceWidth: ScreenWidth(), deviceHeight: ScreenHeight() };
     }
-    if (isTop) {
-      return 'flex-start';
+    return {};
+  }, [isLandscape, isAndroid]);
+
+  const swipeConfigs = useMemo((): {} => {
+    if (isSwipe) {
+      return { swipeDirection: 'down', onSwipeComplete: () => setIsVisible(false) };
     }
-    return 'center';
-  }, [isBottom, isTop]);
+    return {};
+  }, [isSwipe]);
 
   return (
     <BaseModal
-      {...(isSwipeable
-        ? { swipeDirection: 'down', onSwipeComplete: () => setIsVisible(false) }
-        : {})}
+      {...swipeConfigs}
+      {...widthHeightAndroid}
       statusBarTranslucent
       style={styles.modal}
       isVisible={isVisible}
       backdropOpacity={0.3}
-      // backdropColor={theme.colors.black}
-      backdropColor="transparent"
-      animationInTiming={500}
-      // animationIn="slideInUp"
-      // animationOut="slideOutDown"
-      animationIn="fadeInUp"
-      animationOut="fadeOutDown"
+      backdropColor={theme.colors.black}
+      animationInTiming={animationInTiming || 500}
+      animationIn={animationIn || 'fadeInUp'}
+      animationOut={animationOut || 'fadeOutDown'}
       coverScreen
     >
-      <View flex={1} ai="center" jc={justifyContent}>
+      <View flex={1} {...props}>
         <Pressable style={[StyleSheet.absoluteFill]} onPress={() => setIsVisible(false)} />
         {children}
       </View>
@@ -62,8 +73,3 @@ const styles = StyleSheet.create({
     zIndex: 100,
   },
 });
-
-Modal.defaultProps = {
-  isTop: false,
-  isBottom: false,
-};

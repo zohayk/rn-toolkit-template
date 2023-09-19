@@ -4,6 +4,7 @@ import * as AppActions from './actions';
 
 const initialState: AppTypes = {
   initialScreen: 'Auth',
+  isLandscape: false,
 
   accessToken: '',
   refreshToken: '',

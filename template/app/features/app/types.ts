@@ -1,5 +1,6 @@
 export interface AppTypes {
   initialScreen: 'Auth' | 'Home';
+  isLandscape: boolean;
 
   accessToken: string;
   refreshToken: string;

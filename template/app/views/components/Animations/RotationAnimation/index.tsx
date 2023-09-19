@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useRef, useEffect } from 'react';
 import { Animated } from 'react-native';
-import { renderStyleView, ViewProps } from '../../elements';
+import { ViewProps, viewStyle } from '../../elements/styles';
 import { ReactChildren } from 'types';
 
 interface RotationAnimationProps extends ViewProps, ReactChildren {
@@ -33,9 +33,7 @@ export const RotationAnimation: FunctionComponent<RotationAnimationProps> = ({
   });
 
   return (
-    <Animated.View
-      style={[renderStyleView(props).view, { transform: [{ rotateZ: contentTransform }] }]}
-    >
+    <Animated.View style={[viewStyle(props), { transform: [{ rotateZ: contentTransform }] }]}>
       {children}
     </Animated.View>
   );

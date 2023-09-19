@@ -1,47 +1,50 @@
-import React, { FunctionComponent } from 'react';
-import { StyleSheet } from 'react-native';
-import { TouchableView, View } from '../Views';
+import React, { useMemo, FunctionComponent } from 'react';
+import { TouchableView, ViewProps, View, MuffledView } from '../Views';
+import { Controller, Control } from 'react-hook-form';
 // import { Image } from '../Image';
-import { moderateScale } from 'styles';
-import { ReactChildren } from 'types';
+import { theme } from 'styles';
+import { Any } from 'types';
 
-interface CheckBoxProps extends ReactChildren {
-  value: boolean;
-  onValueChange: (value: boolean) => void;
+interface CheckBoxControllerProps {
+  control: Control<Any>;
+  name: string;
 }
 
-export const CheckBox: FunctionComponent<CheckBoxProps> = ({ onValueChange, value, children }) => (
-  <View width="auto">
-    {value ? (
-      <TouchableView onPress={() => onValueChange(!value)} style={styles.checkView}>
-        {/*<Image*/}
-        {/*  width={moderateScale(16)}*/}
-        {/*  height={moderateScale(12)}*/}
-        {/*  source={require('views/assets/icons/checked.png')}*/}
-        {/*/>*/}
-      </TouchableView>
-    ) : (
-      <TouchableView onPress={() => onValueChange(!value)} style={styles.view}>
-        {children}
-      </TouchableView>
-    )}
-  </View>
-);
+export const CheckBox: FunctionComponent<CheckBoxControllerProps> = ({ control, name }) => {
+  const renderStyle = useMemo(() => {
+    const styles: { view: ViewProps } = {
+      view: {
+        br: 10,
+        bg: theme.colors.white,
+        width: 30,
+        height: 30,
+      },
+    };
 
-const styles = StyleSheet.create({
-  view: {
-    borderWidth: moderateScale(1),
-    // borderColor: theme.colors.shamrock,
-    width: moderateScale(30),
-    height: moderateScale(30),
-    borderRadius: moderateScale(8),
-  },
-  checkView: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: moderateScale(30),
-    height: moderateScale(30),
-    borderRadius: moderateScale(8),
-    // backgroundColor: theme.colors.shamrock,
-  },
-});
+    return styles;
+  }, []);
+
+  return (
+    <Controller
+      control={control}
+      name={name}
+      render={({ field: { onChange, value } }) => (
+        <MuffledView>
+          <TouchableView
+            jc="center"
+            ai="center"
+            {...renderStyle.view}
+            style={{ ...theme.shadow }}
+            onPress={() => onChange(!value)}
+          >
+            <View width={15} height={12}>
+              {/*{value ? <Image source={require('views/assets/icons/checkIcon.png')} /> : null}*/}
+            </View>
+          </TouchableView>
+        </MuffledView>
+      )}
+    />
+  );
+};
+
+CheckBox.defaultProps = {};

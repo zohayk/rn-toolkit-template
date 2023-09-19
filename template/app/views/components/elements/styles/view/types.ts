@@ -1,6 +1,6 @@
-import { ViewProps as BaseViewProps, DimensionValue, AnimatableNumericValue } from 'react-native';
+import { AnimatableNumericValue, DimensionValue } from 'react-native';
 
-export interface ViewProps extends BaseViewProps {
+export interface ViewProps {
   pv?: DimensionValue; // paddingVertical
   ph?: DimensionValue; // paddingHorizontal
   pl?: DimensionValue; // paddingLeft
@@ -17,29 +17,28 @@ export interface ViewProps extends BaseViewProps {
 
   bc?: string; // borderColor
   bw?: number; // borderWidth
-  br?: number; // borderRadius
-  gap?: number; // gap
+  bg?: string; // backgroundColor
 
   width?: DimensionValue; // width
+  maxWidth?: DimensionValue; // maxWidth
+  minWidth?: DimensionValue; // minWidth
   height?: DimensionValue; // height
-  minHeight?: DimensionValue; // height
+  maxHeight?: DimensionValue; // maxHeight
+  minHeight?: DimensionValue; // minHeight
 
-  top?: DimensionValue; // top
-  bottom?: DimensionValue; // bottom
-  left?: DimensionValue; // left
-  right?: DimensionValue; // right
+  rgap?: number;
+  gap?: number;
+  cgap?: number;
+  flex?: number;
+  flexGrow?: number;
 
-  bg?: string; // backgroundColor
+  fw?: 'wrap' | 'nowrap'; // flexWrap
   fd?: 'row' | 'column' | 'row-reverse' | 'column-reverse'; // flexDirection
   jc?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around' | 'space-evenly'; // justifyContent
   ai?: 'flex-start' | 'flex-end' | 'center' | 'stretch' | 'baseline'; // alignItems
   ta?: 'auto' | 'left' | 'right' | 'center' | 'justify'; // textAlign
-  fw?: 'wrap' | 'nowrap'; // flexWrap
-  position?: 'absolute' | 'relative'; // position
-  overflow?: 'hidden' | 'visible' | 'scroll'; // overflow
-  flex?: number; // flex
+
   opacity?: AnimatableNumericValue; // opacity
-  zi?: number; // zIndex
 }
 
 export interface ViewStyleProps {
@@ -59,19 +58,22 @@ export interface ViewStyleProps {
 
   borderColor?: string;
   borderWidth?: number;
-  borderRadius?: number;
-  gap?: number;
+  backgroundColor?: string;
 
   width?: DimensionValue;
+  maxWidth?: DimensionValue;
+  minWidth?: DimensionValue;
   height?: DimensionValue;
+  maxHeight?: DimensionValue;
   minHeight?: DimensionValue;
 
-  top?: DimensionValue;
-  bottom?: DimensionValue;
-  left?: DimensionValue;
-  right?: DimensionValue;
+  rowGap?: number;
+  gap?: number;
+  columnGap?: number;
+  flex?: number;
+  flexGrow?: number;
 
-  backgroundColor?: string;
+  flexWrap?: 'wrap' | 'nowrap' | 'wrap-reverse';
   flexDirection?: 'row' | 'column' | 'row-reverse' | 'column-reverse';
   justifyContent?:
     | 'flex-start'
@@ -82,10 +84,6 @@ export interface ViewStyleProps {
     | 'space-evenly';
   alignItems?: 'flex-start' | 'flex-end' | 'center' | 'stretch' | 'baseline';
   textAlign?: 'auto' | 'left' | 'right' | 'center' | 'justify';
-  flexWrap?: 'wrap' | 'nowrap' | 'wrap-reverse';
-  position?: 'absolute' | 'relative';
-  overflow?: 'hidden' | 'visible' | 'scroll';
-  flex?: number;
+
   opacity?: AnimatableNumericValue;
-  zIndex?: number;
 }

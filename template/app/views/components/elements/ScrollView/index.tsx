@@ -1,47 +1,26 @@
 import React, { Fragment, FunctionComponent } from 'react';
-import {
-  ScrollView as BaseScrollView,
-  ScrollViewProps as BaseScrollViewProps,
-  StyleSheet,
-} from 'react-native';
+import { ScrollView as ScrollViewBase, ScrollViewProps } from 'react-native';
 
-interface ScrollViewProps extends BaseScrollViewProps {
-  forwardedRef?: React.Ref<BaseScrollView>;
-}
+const FLEX_GROW = 1;
+const WIDTH = '100%';
 
-export const ScrollView: FunctionComponent<ScrollViewProps> = ({
-  forwardedRef,
-  children,
-  ...props
-}) => (
-  <BaseScrollView
-    ref={forwardedRef}
-    centerContent
-    contentContainerStyle={styles.scrollView}
-    showsHorizontalScrollIndicator={false}
-    showsVerticalScrollIndicator={false}
-    keyboardShouldPersistTaps="handled"
-    {...props}
-  >
-    <Fragment>{children}</Fragment>
-  </BaseScrollView>
-);
-
-export const ScrollViewRef = React.forwardRef(
-  (props: BaseScrollViewProps, ref?: React.Ref<BaseScrollView>) => (
-    <ScrollView forwardedRef={ref} {...props} />
+export const ScrollView: FunctionComponent<ScrollViewProps> = React.memo(
+  ({ children, ...props }) => (
+    <ScrollViewBase
+      onTouchStart={e => e.stopPropagation()}
+      centerContent
+      contentContainerStyle={{ flexGrow: FLEX_GROW }}
+      style={{ width: WIDTH }}
+      showsHorizontalScrollIndicator={false}
+      showsVerticalScrollIndicator={false}
+      {...props}
+    >
+      <Fragment>{children}</Fragment>
+    </ScrollViewBase>
   ),
 );
 
-const styles = StyleSheet.create({
-  scrollView: {
-    flexGrow: 1,
-  },
-});
-
 ScrollView.defaultProps = {
+  keyboardShouldPersistTaps: 'handled',
   keyboardDismissMode: 'none',
 };
-
-export { BaseScrollView };
-export type { BaseScrollViewProps };

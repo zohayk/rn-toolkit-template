@@ -1,6 +1,5 @@
 import React, { useMemo, FunctionComponent } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { theme } from 'styles';
 import { ScreenHeight, useSafeArea } from 'utils';
 import { View, ViewProps } from '../Views';
 
@@ -10,7 +9,7 @@ export const GeneralView: FunctionComponent<ViewProps> = ({ children, ...props }
   const renderStyle = useMemo(() => {
     return {
       flex: 1,
-      backgroundColor: theme.colors.concrete,
+      backgroundColor: 'transparent',
     };
   }, [ScreenHeight]);
 
@@ -22,3 +21,5 @@ export const GeneralView: FunctionComponent<ViewProps> = ({ children, ...props }
     </SafeAreaView>
   );
 };
+
+GeneralView.defaultProps = {};

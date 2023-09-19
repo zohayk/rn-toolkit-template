@@ -1,24 +1,31 @@
 import React, { Fragment, FunctionComponent } from 'react';
 import { TouchableOpacity, TouchableOpacityProps } from 'react-native';
-import { ViewProps } from './types';
-import { renderStyle } from './styles';
+import { ReactChildren } from 'types';
+import {
+  borderRadiusStyle,
+  BorderRadiusProps,
+  viewStyle,
+  ViewProps,
+  additionStyle,
+  AdditionProps,
+} from '../styles';
 
-interface TouchableViewProps extends TouchableOpacityProps {
-  onPress: () => void;
-}
+type TouchableViewProps = ViewProps &
+  TouchableOpacityProps &
+  ReactChildren &
+  BorderRadiusProps &
+  AdditionProps;
 
-export const TouchableView: FunctionComponent<ViewProps & TouchableViewProps> = ({
+export const TouchableView: FunctionComponent<TouchableViewProps> = ({
   children,
   onPress,
   activeOpacity,
-  disabled,
   style,
   ...props
 }) => (
   <TouchableOpacity
-    disabled={disabled}
     activeOpacity={activeOpacity}
-    style={[renderStyle(props).view, style]}
+    style={[viewStyle(props), borderRadiusStyle(props), additionStyle(props), style]}
     onPress={onPress}
   >
     <Fragment>{children}</Fragment>

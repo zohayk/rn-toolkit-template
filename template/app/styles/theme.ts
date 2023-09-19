@@ -12,9 +12,8 @@ export const theme = {
   shadow: {},
 
   fonts: {
-    ExtraBold: '',
     Bold: '',
+    Medium: '',
     Regular: '',
-    Light: '',
   },
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { SafeAreaInsetsContext } from 'react-native-safe-area-context';
 import { LayoutAnimation } from 'react-native';
-import { Text, TouchableView, View } from '../../elements';
+import { Text, TouchableView, View, MuffledView } from '../../elements';
 import { theme } from 'styles';
 
 let timeout: ReturnType<typeof setTimeout>;
@@ -52,26 +52,26 @@ export class PopUpMessage extends React.PureComponent {
     return (
       <SafeAreaInsetsContext.Consumer>
         {(insets: { top: number } | null) => (
-          <TouchableView
-            ph={20}
+          <MuffledView
             zi={100}
             position="absolute"
             top={state.show ? insets?.top : -100}
             overflow="hidden"
-            onPress={onClose}
           >
-            <View
-              bg={isError ? theme.colors.coralRed : theme.colors.malachite}
-              height={45}
-              fd="row"
-              jc="space-between"
-              ai="center"
-            >
-              <Text bold fs={18}>
-                {message}
-              </Text>
-            </View>
-          </TouchableView>
+            <TouchableView ph={20} onPress={onClose}>
+              <View
+                bg={isError ? theme.colors.coralRed : theme.colors.malachite}
+                height={45}
+                fd="row"
+                jc="space-between"
+                ai="center"
+              >
+                <Text bold fs={18}>
+                  {message}
+                </Text>
+              </View>
+            </TouchableView>
+          </MuffledView>
         )}
       </SafeAreaInsetsContext.Consumer>
     );

@@ -1,24 +1,33 @@
 import React, { Fragment, FunctionComponent } from 'react';
 import { ImageBackground, ImageBackgroundProps } from 'react-native';
-import { ViewProps } from './types';
 import { ReactChildren } from 'types';
-import { renderStyle } from './styles';
+import {
+  borderRadiusStyle,
+  BorderRadiusProps,
+  viewStyle,
+  ViewProps,
+  imageStyle,
+  ImageProps as CustomImageProps,
+  additionStyle,
+  AdditionProps,
+} from '../styles';
 
 type BackgroundViewProps = ViewProps &
   Omit<ImageBackgroundProps, 'width' | 'height'> &
-  ReactChildren;
+  ReactChildren &
+  BorderRadiusProps &
+  AdditionProps &
+  CustomImageProps;
 
 export const BackgroundView: FunctionComponent<BackgroundViewProps> = ({
   children,
-  source,
   style,
   ...props
 }) => (
   <ImageBackground
-    {...(props.br ? { borderRadius: props.br } : {})}
-    {...(props.resizeMode ? { resizeMode: props.resizeMode } : {})}
-    style={[renderStyle(props).view, style]}
-    source={source}
+    {...borderRadiusStyle(props)}
+    {...imageStyle(props)}
+    style={[viewStyle(props), additionStyle(props), style]}
   >
     <Fragment>{children}</Fragment>
   </ImageBackground>

@@ -1,4 +1,4 @@
-export * from './Button';
+// export * from './Button';
 export * from './CheckBox';
 export * from './FlatList';
 export * from './GeneralView';

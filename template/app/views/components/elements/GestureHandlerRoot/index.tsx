@@ -1,14 +1,9 @@
 import React, { FunctionComponent } from 'react';
-import { StyleSheet } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { ReactChildren } from 'types';
 
-export const GestureHandlerRoot: FunctionComponent<ReactChildren> = ({ children }) => (
-  <GestureHandlerRootView style={styles.rootView}>{children}</GestureHandlerRootView>
-);
+const FLEX_GROW = 1;
 
-const styles = StyleSheet.create({
-  rootView: {
-    flexGrow: 1,
-  },
-});
+export const GestureHandlerRoot: FunctionComponent<ReactChildren> = ({ children }) => (
+  <GestureHandlerRootView style={{ flexGrow: FLEX_GROW }}>{children}</GestureHandlerRootView>
+);

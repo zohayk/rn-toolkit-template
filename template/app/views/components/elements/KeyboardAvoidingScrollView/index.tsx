@@ -1,5 +1,5 @@
 import React, { Fragment, FunctionComponent } from 'react';
-import { KeyboardAvoidingView, Keyboard, RefreshControlProps } from 'react-native';
+import { KeyboardAvoidingView, RefreshControlProps } from 'react-native';
 import { ReactChildren } from 'types';
 import { isIOS } from 'utils';
 import { ScrollView } from '../ScrollView';
@@ -35,11 +35,9 @@ export const KeyboardAvoidingScrollView: FunctionComponent<Props> = ({
         </KeyboardAvoidingView>
       ) : (
         <ScrollView
-          refreshControl={refreshControl}
-          onScrollBeginDrag={() => {
-            dismissMode === 'on-drag' && Keyboard.dismiss();
-          }}
           contentContainerStyle={{ flexGrow: FLEX }}
+          refreshControl={refreshControl}
+          keyboardDismissMode={dismissMode}
         >
           {children}
         </ScrollView>
