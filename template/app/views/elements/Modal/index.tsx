@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { StyleSheet, Pressable } from 'react-native';
 import { useSelector } from 'react-redux';
 import { View, ViewProps } from '../Views';
@@ -17,7 +17,7 @@ interface ModalProps extends ReactChildren, ViewProps {
   animationOut?: Any;
 }
 
-export const Modal: FunctionComponent<ModalProps> = ({
+export const Modal: React.FC<ModalProps> = ({
   children,
   isVisible,
   setIsVisible,

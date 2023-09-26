@@ -1,4 +1,4 @@
-import React, { useMemo, FunctionComponent } from 'react';
+import React, { useMemo } from 'react';
 import { TouchableView, ViewProps, View, MuffledView } from '../Views';
 import { Controller, Control } from 'react-hook-form';
 // import { Image } from '../Image';
@@ -10,7 +10,7 @@ interface CheckBoxControllerProps {
   name: string;
 }
 
-export const CheckBox: FunctionComponent<CheckBoxControllerProps> = ({ control, name }) => {
+export const CheckBox: React.FC<CheckBoxControllerProps> = ({ control, name }) => {
   const renderStyle = useMemo(() => {
     const styles: { view: ViewProps } = {
       view: {

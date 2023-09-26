@@ -1,9 +1,9 @@
-import React, { useMemo, FunctionComponent } from 'react';
+import React, { useMemo } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScreenHeight, useSafeArea } from 'utils';
 import { View, ViewProps } from '../Views';
 
-export const GeneralView: FunctionComponent<ViewProps> = ({ children, ...props }) => {
+export const GeneralView: React.FC<ViewProps> = ({ children, ...props }) => {
   const { top } = useSafeArea();
 
   const renderStyle = useMemo(() => {

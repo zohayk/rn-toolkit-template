@@ -11,7 +11,7 @@ module.exports = {
     'spaced-comment': 'off',
     'space-before-function-paren': [
       'error',
-      { anonymous: 'never', named: 'never', asyncArrow: 'always' },
+      { anonymous: 'always', named: 'never', asyncArrow: 'always' },
     ],
     'no-shadow': 'off',
     'no-unused-expressions': ['error', { allowShortCircuit: true }],

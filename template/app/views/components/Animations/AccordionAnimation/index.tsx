@@ -1,6 +1,6 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { useState } from 'react';
 import { LayoutAnimation } from 'react-native';
-import { View, Text, TouchableView, ViewProps } from '../../elements';
+import { View, Text, TouchableView, ViewProps } from 'elements';
 import { RotationAnimation } from '../RotationAnimation';
 import { ReactChildren } from 'types';
 
@@ -10,7 +10,7 @@ interface AccordionProps extends ViewProps, ReactChildren {
   defaultValue?: boolean;
 }
 
-export const AccordionAnimation: FunctionComponent<AccordionProps> = ({
+export const AccordionAnimation: React.FC<AccordionProps> = ({
   children,
   title,
   touchPh,

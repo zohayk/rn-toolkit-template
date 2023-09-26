@@ -1,13 +1,13 @@
-import React, { FunctionComponent, useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Animated } from 'react-native';
-import { ViewProps, viewStyle } from '../../elements/styles';
+import { ViewProps, viewStyle } from 'elements/styles';
 import { ReactChildren } from 'types';
 
 interface RotationAnimationProps extends ViewProps, ReactChildren {
   trigger: boolean;
 }
 
-export const RotationAnimation: FunctionComponent<RotationAnimationProps> = ({
+export const RotationAnimation: React.FC<RotationAnimationProps> = ({
   children,
   trigger,
   ...props

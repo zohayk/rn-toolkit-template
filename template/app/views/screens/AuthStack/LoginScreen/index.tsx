@@ -1,8 +1,8 @@
-import React, { FunctionComponent } from 'react';
-import { GeneralView, Text, View } from 'components';
+import React from 'react';
+import { GeneralView, Text, View } from 'elements';
 import { useSafeArea } from 'utils';
 
-export const LoginScreen: FunctionComponent = () => {
+export const LoginScreen: React.FC = () => {
   const { bottom } = useSafeArea();
 
   return (

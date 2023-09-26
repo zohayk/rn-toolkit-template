@@ -1,4 +1,4 @@
-import React, { Fragment, FunctionComponent } from 'react';
+import React, { Fragment } from 'react';
 import { ImageBackground, ImageBackgroundProps } from 'react-native';
 import { ReactChildren } from 'types';
 import {
@@ -19,7 +19,7 @@ type BackgroundViewProps = ViewProps &
   AdditionProps &
   CustomImageProps;
 
-export const BackgroundView: FunctionComponent<BackgroundViewProps> = ({
+export const BackgroundView: React.FC<BackgroundViewProps> = ({
   children,
   style,
   ...props

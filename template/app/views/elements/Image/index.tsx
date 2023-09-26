@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { Image as BaseImage, ImageProps as ImagePropsBase } from 'react-native';
 import {
   borderRadiusStyle,
@@ -14,7 +14,7 @@ type ImageProps = ViewProps &
   BorderRadiusProps &
   CustomImageProps;
 
-export const Image: FunctionComponent<ImageProps> = ({ style, ...props }) => (
+export const Image: React.FC<ImageProps> = ({ style, ...props }) => (
   <BaseImage
     {...borderRadiusStyle(props)}
     {...imageStyle(props)}

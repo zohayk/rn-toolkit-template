@@ -7,7 +7,7 @@ import { KeyboardDismiss } from 'utils';
 
 const FLEX = 1;
 
-export const Common: React.FunctionComponent<ReactChildren> = ({ children }) => {
+export const Common: React.FC<ReactChildren> = ({ children }) => {
   const startEventRef = useRef<NativeTouchEvent>();
 
   const endTouch = (arg: NativeTouchEvent): void => {

@@ -19,8 +19,9 @@ module.exports = {
         ],
         root: ['./app'],
         alias: {
-          components: './app/views/components',
           assets: './app/views/assets',
+          components: './app/views/components',
+          elements: './app/views/elements',
           containers: './app/views/containers',
         },
       },

@@ -7,6 +7,8 @@
       "assets/*": ["views/assets/*"],
       "components": ["views/components"],
       "components/*": ["views/components/*"],
+      "elements": ["views/elements"],
+      "elements/*": ["views/elements/*"],
       "containers": ["views/containers"],
       "containers/*": ["views/containers/*"]
     },

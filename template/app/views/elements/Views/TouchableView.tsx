@@ -1,4 +1,4 @@
-import React, { Fragment, FunctionComponent } from 'react';
+import React, { Fragment } from 'react';
 import { TouchableOpacity, TouchableOpacityProps } from 'react-native';
 import { ReactChildren } from 'types';
 import {
@@ -16,7 +16,7 @@ type TouchableViewProps = ViewProps &
   BorderRadiusProps &
   AdditionProps;
 
-export const TouchableView: FunctionComponent<TouchableViewProps> = ({
+export const TouchableView: React.FC<TouchableViewProps> = ({
   children,
   onPress,
   activeOpacity,

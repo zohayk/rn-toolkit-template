@@ -1,10 +1,10 @@
-import React, { Fragment, FunctionComponent } from 'react';
+import React, { Fragment } from 'react';
 import { ScrollView as ScrollViewBase, ScrollViewProps } from 'react-native';
 
 const FLEX_GROW = 1;
 const WIDTH = '100%';
 
-export const ScrollView: FunctionComponent<ScrollViewProps> = React.memo(
+export const ScrollView: React.FC<ScrollViewProps> = React.memo(
   ({ children, ...props }) => (
     <ScrollViewBase
       onTouchStart={e => e.stopPropagation()}

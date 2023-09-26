@@ -21,7 +21,7 @@ interface InputProps {
   multiline?: boolean;
 }
 
-export const InputController: React.FunctionComponent<InputProps> = ({
+export const InputController: React.FC<InputProps> = ({
   control,
   name,
   keyboardType,

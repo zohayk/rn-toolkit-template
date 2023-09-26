@@ -1,4 +1,4 @@
-import React, { Fragment, FunctionComponent } from 'react';
+import React, { Fragment } from 'react';
 import { View as BaseView, ViewProps as BaseViewProps } from 'react-native';
 import { ReactChildren } from 'types';
 import {
@@ -19,7 +19,7 @@ export type ViewProps = CustomViewProps &
   AdditionProps &
   BaseViewProps;
 
-export const View: FunctionComponent<ViewProps> = ({ children, style, ...props }) => (
+export const View: React.FC<ViewProps> = ({ children, style, ...props }) => (
   <BaseView
     style={[
       borderRadiusStyle(props),
@@ -33,7 +33,7 @@ export const View: FunctionComponent<ViewProps> = ({ children, style, ...props }
   </BaseView>
 );
 
-export const MuffledView: FunctionComponent<ViewProps> = ({ ...props }) => (
+export const MuffledView: React.FC<ViewProps> = ({ ...props }) => (
   <View {...props} onTouchStart={e => e.stopPropagation()} />
 );
 

@@ -1,4 +1,4 @@
-import React, { Fragment, FunctionComponent } from 'react';
+import React, { Fragment } from 'react';
 import { Text as BaseText, TextProps as BaseTextProps } from 'react-native';
 import { ReactChildren } from 'types';
 import { theme } from 'styles';
@@ -20,7 +20,7 @@ export type TextProps = ViewProps &
   BaseTextProps &
   CustomTextProps;
 
-export const Text: FunctionComponent<TextProps> = ({ children, style, ...props }) => (
+export const Text: React.FC<TextProps> = ({ children, style, ...props }) => (
   <BaseText
     style={[
       borderRadiusStyle(props),

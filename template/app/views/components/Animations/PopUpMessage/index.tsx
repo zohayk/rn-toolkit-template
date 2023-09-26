@@ -1,7 +1,7 @@
 import React from 'react';
 import { SafeAreaInsetsContext } from 'react-native-safe-area-context';
 import { LayoutAnimation } from 'react-native';
-import { Text, TouchableView, View, MuffledView } from '../../elements';
+import { Text, TouchableView, View, MuffledView } from 'elements';
 import { theme } from 'styles';
 
 let timeout: ReturnType<typeof setTimeout>;

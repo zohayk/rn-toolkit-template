@@ -5,7 +5,7 @@ import { Any } from 'types';
 
 type BaseFlatListProps = FlatListProps<Any>;
 
-export const FlatList: React.FunctionComponent<BaseFlatListProps> = ({ ...props }) => (
+export const FlatList: React.FC<BaseFlatListProps> = ({ ...props }) => (
   <BaseFlatList
     onTouchStart={e => e.stopPropagation()}
     style={styles.flatList}

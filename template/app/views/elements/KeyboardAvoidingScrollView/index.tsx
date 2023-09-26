@@ -1,4 +1,4 @@
-import React, { Fragment, FunctionComponent } from 'react';
+import React, { Fragment } from 'react';
 import { KeyboardAvoidingView, RefreshControlProps } from 'react-native';
 import { ReactChildren } from 'types';
 import { isIOS } from 'utils';
@@ -11,7 +11,7 @@ interface Props extends ReactChildren {
 
 const FLEX = 1;
 
-export const KeyboardAvoidingScrollView: FunctionComponent<Props> = ({
+export const KeyboardAvoidingScrollView: React.FC<Props> = ({
   children,
   dismissMode,
   refreshControl,

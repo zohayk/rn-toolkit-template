@@ -1,15 +1,15 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { DotIndicator, DotIndicatorProps } from 'react-native-indicators';
 import { theme, moderateScale } from 'styles';
 import { View } from '../Views';
 
-export const PageLoader: FunctionComponent = () => (
+export const PageLoader: React.FC = () => (
   <View flex={1}>
     <MiniLoader />
   </View>
 );
 
-export const MiniLoader: FunctionComponent<DotIndicatorProps> = ({ ...props }) => {
+export const MiniLoader: React.FC<DotIndicatorProps> = ({ ...props }) => {
   return <DotIndicator {...props} />;
 };
 

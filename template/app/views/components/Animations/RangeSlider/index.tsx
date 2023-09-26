@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { PanGestureHandler } from 'react-native-gesture-handler';
 import Animated, {
@@ -15,7 +15,7 @@ interface RangeSliderProps {
   defaultValue?: 20 | 40 | 60 | 80 | 100;
 }
 
-export const RangeSlider: FunctionComponent<RangeSliderProps> = ({
+export const RangeSlider: React.FC<RangeSliderProps> = ({
   sliderWidth,
   onValueChange,
   defaultValue,

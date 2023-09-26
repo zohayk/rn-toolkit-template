@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { StatusBar, UIManager } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { PopUpMessage } from 'components';
@@ -13,7 +13,7 @@ if (isAndroid && UIManager.setLayoutAnimationEnabledExperimental) {
   UIManager.setLayoutAnimationEnabledExperimental(true);
 }
 
-export const AppContainer: FunctionComponent = () => {
+export const AppContainer: React.FC = () => {
   // const initialScreen = useSelector((state: RootState) => state.user.initialScreen);
 
   // useEffect(() => {

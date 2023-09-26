@@ -1,4 +1,4 @@
-import React, { useMemo, FunctionComponent } from 'react';
+import React, { useMemo } from 'react';
 import { TouchableView, ViewProps } from '../Views';
 import { Text, TextProps } from '../Text';
 import { MiniLoader } from '../Loaders';
@@ -19,7 +19,7 @@ interface ButtonStyleProps {
   loaderSize: number;
 }
 
-export const Button: FunctionComponent<ButtonProps & ViewProps> = ({
+export const Button: React.FC<ButtonProps & ViewProps> = ({
   label,
   isLoader,
   children,
