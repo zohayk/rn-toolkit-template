@@ -20,10 +20,10 @@ interface ButtonStyleProps {
 }
 
 export const Button: React.FC<ButtonProps & ViewProps> = ({
-  label,
-  isLoader,
+  label = '',
+  isLoader = false,
   children,
-  disabled,
+  disabled = false,
   onPress,
   ...props
 }) => {
@@ -69,10 +69,4 @@ export const Button: React.FC<ButtonProps & ViewProps> = ({
       )}
     </TouchableView>
   );
-};
-
-Button.defaultProps = {
-  label: '',
-  disabled: false,
-  isLoader: false,
 };

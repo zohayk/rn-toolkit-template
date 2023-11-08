@@ -7,6 +7,9 @@ export const borderRadiusStyle = (props: BorderRadiusProps): BorderRadiusStylePr
   if (props.br !== undefined) {
     style.borderRadius = moderateScale(props.br);
   }
+  if (props.borderStyle !== undefined) {
+    style.borderStyle = props.borderStyle;
+  }
   if (props.bblr !== undefined) {
     style.borderBottomLeftRadius = moderateScale(props.bblr);
   }

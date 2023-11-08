@@ -9,6 +9,8 @@
       "components/*": ["views/components/*"],
       "elements": ["views/elements"],
       "elements/*": ["views/elements/*"],
+      "modals": ["views/modals"],
+      "modals/*": ["views/modals/*"],
       "containers": ["views/containers"],
       "containers/*": ["views/containers/*"]
     },

@@ -18,7 +18,7 @@ interface RangeSliderProps {
 export const RangeSlider: React.FC<RangeSliderProps> = ({
   sliderWidth,
   onValueChange,
-  defaultValue,
+  defaultValue = 20,
 }) => {
   const MARKERS = [
     { index: 0, publicValue: 20, active: useSharedValue(0) },
@@ -163,10 +163,6 @@ export const RangeSlider: React.FC<RangeSliderProps> = ({
       </PanGestureHandler>
     </View>
   );
-};
-
-RangeSlider.defaultProps = {
-  defaultValue: 20,
 };
 
 const styles = StyleSheet.create({

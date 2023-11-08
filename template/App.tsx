@@ -13,8 +13,8 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { AppContainer } from './app/AppContainer';
-import { GestureHandlerRoot } from './app/views/components';
-import store, { persistor } from './app/features';
+import { GestureHandlerRoot } from './app/views/elements';
+import store, { persistor } from './app/store';
 
 const App: React.FC = () => (
   <SafeAreaProvider>

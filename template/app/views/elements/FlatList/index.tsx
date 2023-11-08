@@ -3,11 +3,13 @@ import { FlatList as BaseFlatList, StyleSheet, FlatListProps, Keyboard } from 'r
 import { isAndroid } from 'utils';
 import { Any } from 'types';
 
-type BaseFlatListProps = FlatListProps<Any>;
+interface BaseFlatListProps extends FlatListProps<Any> {
+  forwardRef?: React.Ref<BaseFlatList>;
+}
 
-export const FlatList: React.FC<BaseFlatListProps> = ({ ...props }) => (
+export const FlatList: React.FC<BaseFlatListProps> = ({ forwardRef, ...props }) => (
   <BaseFlatList
-    onTouchStart={e => e.stopPropagation()}
+    ref={forwardRef}
     style={styles.flatList}
     showsHorizontalScrollIndicator={false}
     showsVerticalScrollIndicator={false}

@@ -22,6 +22,7 @@ module.exports = {
           assets: './app/views/assets',
           components: './app/views/components',
           elements: './app/views/elements',
+          modals: './app/views/modals',
           containers: './app/views/containers',
         },
       },

@@ -21,6 +21,7 @@ export type ViewProps = CustomViewProps &
 
 export const View: React.FC<ViewProps> = ({ children, style, ...props }) => (
   <BaseView
+    {...(props.onTouchStart ? { onTouchStart: props.onTouchStart } : {})}
     style={[
       borderRadiusStyle(props),
       viewStyle(props),

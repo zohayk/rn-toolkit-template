@@ -21,5 +21,3 @@ export const GeneralView: React.FC<ViewProps> = ({ children, ...props }) => {
     </SafeAreaView>
   );
 };
-
-GeneralView.defaultProps = {};

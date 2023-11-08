@@ -10,13 +10,7 @@ interface InputProps {
   control: Control<Any>;
   name: string;
 
-  keyboardType?:
-    | 'default'
-    | 'number-pad'
-    | 'decimal-pad'
-    | 'numeric'
-    | 'email-address'
-    | 'phone-pad';
+  keyboardType?: 'default' | 'number-pad' | 'email-address';
   placeholder?: string;
   multiline?: boolean;
 }
@@ -24,9 +18,9 @@ interface InputProps {
 export const InputController: React.FC<InputProps> = ({
   control,
   name,
-  keyboardType,
-  placeholder,
-  multiline,
+  keyboardType = 'default',
+  placeholder = '',
+  multiline = false,
   ...props
 }) => {
   const renderStyle = useMemo(() => {
@@ -79,6 +73,7 @@ export const InputController: React.FC<InputProps> = ({
                 autoCorrect={false}
                 autoCapitalize="none"
                 textAlignVertical="top"
+                onEndEditing={() => false}
                 onFocus={() => false}
                 onBlur={() => false}
                 style={renderStyle.input}
@@ -97,10 +92,4 @@ export const InputController: React.FC<InputProps> = ({
       />
     </View>
   );
-};
-
-InputController.defaultProps = {
-  multiline: false,
-  placeholder: '',
-  keyboardType: 'default',
 };

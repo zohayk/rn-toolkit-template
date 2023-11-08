@@ -60,39 +60,39 @@ export const viewStyle = (props: ViewProps): ViewStyleProps => {
   }
   props.bg && (style.backgroundColor = props.bg);
 
-  if (props.width) {
+  if (props.width !== undefined) {
     typeof props.width === 'string' && (style.width = props.width);
     typeof props.width === 'number' && (style.width = moderateScale(props.width));
   }
-  if (props.maxWidth) {
+  if (props.maxWidth !== undefined) {
     typeof props.maxWidth === 'string' && (style.maxWidth = props.maxWidth);
     typeof props.maxWidth === 'number' && (style.maxWidth = moderateScale(props.maxWidth));
   }
-  if (props.minWidth) {
+  if (props.minWidth !== undefined) {
     typeof props.minWidth === 'string' && (style.minWidth = props.minWidth);
     typeof props.minWidth === 'number' && (style.minWidth = moderateScale(props.minWidth));
   }
-  if (props.height) {
+  if (props.height !== undefined) {
     typeof props.height === 'string' && (style.height = props.height);
     typeof props.height === 'number' && (style.height = moderateScale(props.height));
   }
-  if (props.maxHeight) {
+  if (props.maxHeight !== undefined) {
     typeof props.maxHeight === 'string' && (style.maxHeight = props.maxHeight);
     typeof props.maxHeight === 'number' && (style.maxHeight = moderateScale(props.maxHeight));
   }
-  if (props.minHeight) {
+  if (props.minHeight !== undefined) {
     typeof props.minHeight === 'string' && (style.minHeight = props.minHeight);
     typeof props.minHeight === 'number' && (style.minHeight = moderateScale(props.minHeight));
   }
 
   if (props.rgap !== undefined) {
-    style.rowGap = props.rgap;
+    style.rowGap = moderateScale(props.rgap);
   }
   if (props.gap !== undefined) {
-    style.gap = props.gap;
+    style.gap = moderateScale(props.gap);
   }
   if (props.cgap !== undefined) {
-    style.columnGap = props.cgap;
+    style.columnGap = moderateScale(props.cgap);
   }
   if (props.flex !== undefined) {
     style.flex = props.flex;
@@ -106,6 +106,7 @@ export const viewStyle = (props: ViewProps): ViewStyleProps => {
   props.jc && (style.justifyContent = props.jc);
   props.ai && (style.alignItems = props.ai);
   props.ta && (style.textAlign = props.ta);
+  props.display && (style.display = props.display);
 
   if (props.opacity !== undefined) {
     props.opacity && (style.opacity = props.opacity);

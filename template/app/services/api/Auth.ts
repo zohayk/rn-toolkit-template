@@ -1,4 +1,4 @@
-import Api from './Api';
+import { Api } from './Api';
 import { AxiosPromise } from 'axios';
 
 export class Auth {

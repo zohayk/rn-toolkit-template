@@ -1,10 +1,9 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosPromise } from 'axios';
-import { Any } from 'types';
-import { config as baseConfig } from 'config';
+import baseConfig from 'config';
 
-export class Api {
-  static instance: Api;
+class ApiInstance {
   axiosInstance: AxiosInstance;
+
   constructor() {
     this.axiosInstance = axios.create({
       baseURL: baseConfig.API_URI,
@@ -15,40 +14,26 @@ export class Api {
     });
   }
 
-  static getInstance(): typeof Api.instance {
-    if (!Api.instance) {
-      Api.instance = new Api();
-    }
-    return Api.instance;
-  }
-  static getAxios(): AxiosInstance {
-    return Api.getInstance().axiosInstance;
+  setAuthToken(token: string): void {
+    this.axiosInstance.defaults.headers['X-AUTH-TOKEN'] = token;
   }
 
-  static setAuthToken(token: string | null): void {
-    (Api.getAxios().defaults.headers as Any).token = token;
+  clearAuthToken(): void {
+    delete this.axiosInstance.defaults.headers['X-AUTH-TOKEN'];
   }
 
-  static clearAuthToken(): void {
-    (Api.getAxios().defaults.headers as Any).token = null;
+  get<T>(url: string, params: object = {}, config: AxiosRequestConfig = {}): AxiosPromise<T> {
+    return this.axiosInstance.get<T>(url, { params, ...config });
   }
-
-  static get<T>(
-    url: string,
-    params: object = {},
-    config: AxiosRequestConfig = {},
-  ): AxiosPromise<T> {
-    return Api.getAxios().get<T>(url, { params, ...config });
+  post<T>(url: string, data?: object, config?: AxiosRequestConfig): AxiosPromise<T> {
+    return this.axiosInstance.post<T>(url, data, config);
   }
-  static post<T>(url: string, data?: object, config?: AxiosRequestConfig): AxiosPromise<T> {
-    return Api.getAxios().post<T>(url, data, config);
+  put<T>(url: string, data?: object, config?: AxiosRequestConfig): AxiosPromise<T> {
+    return this.axiosInstance.put<T>(url, data, config);
   }
-  static put<T>(url: string, data?: object, config?: AxiosRequestConfig): AxiosPromise<T> {
-    return Api.getAxios().put<T>(url, data, config);
-  }
-  static delete<T>(url: string, data?: object): AxiosPromise<T> {
-    return Api.getAxios().delete<T>(url, data);
+  delete<T>(url: string, data: object, config?: AxiosRequestConfig): AxiosPromise<T> {
+    return this.axiosInstance.delete<T>(url, { data, ...config });
   }
 }
 
-export default Api;
+export const Api = new ApiInstance();

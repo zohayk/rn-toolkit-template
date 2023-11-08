@@ -11,15 +11,15 @@ import {
 } from '../styles';
 
 type TouchableViewProps = ViewProps &
-  TouchableOpacityProps &
-  ReactChildren &
+  Omit<TouchableOpacityProps, 'onPress'> & { onPress?: () => void } & ReactChildren &
   BorderRadiusProps &
   AdditionProps;
 
 export const TouchableView: React.FC<TouchableViewProps> = ({
   children,
   onPress,
-  activeOpacity,
+  activeOpacity = 0.7,
+  disabled,
   style,
   ...props
 }) => (
@@ -27,6 +27,7 @@ export const TouchableView: React.FC<TouchableViewProps> = ({
     activeOpacity={activeOpacity}
     style={[viewStyle(props), borderRadiusStyle(props), additionStyle(props), style]}
     onPress={onPress}
+    disabled={disabled}
   >
     <Fragment>{children}</Fragment>
   </TouchableOpacity>
@@ -34,5 +35,4 @@ export const TouchableView: React.FC<TouchableViewProps> = ({
 
 TouchableView.defaultProps = {
   width: '100%',
-  activeOpacity: 0.7,
 };

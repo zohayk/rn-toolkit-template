@@ -7,7 +7,18 @@ export interface TextProps {
 
   fs?: number; // fontSize
   lh?: number; // lineHeight
-  fw?: 'normal' | 'bold' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900'; // fontWeight
+  fontWeight?:
+    | 'normal'
+    | 'bold'
+    | '100'
+    | '200'
+    | '300'
+    | '400'
+    | '500'
+    | '600'
+    | '700'
+    | '800'
+    | '900'; // fontWeight
   fontFamily?: string; // fontFamily
 
   td?: 'none' | 'underline' | 'line-through' | 'underline line-through'; // textDecorationLine

@@ -2,6 +2,8 @@ import React from 'react';
 import { GeneralView, Text, View } from 'elements';
 import { useSafeArea } from 'utils';
 
+// { equalityFn: shallowEqual }
+
 export const LoginScreen: React.FC = () => {
   const { bottom } = useSafeArea();
 

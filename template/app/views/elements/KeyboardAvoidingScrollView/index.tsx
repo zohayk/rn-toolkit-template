@@ -13,7 +13,7 @@ const FLEX = 1;
 
 export const KeyboardAvoidingScrollView: React.FC<Props> = ({
   children,
-  dismissMode,
+  dismissMode = 'none',
   refreshControl,
 }) => {
   return (
@@ -44,8 +44,4 @@ export const KeyboardAvoidingScrollView: React.FC<Props> = ({
       )}
     </Fragment>
   );
-};
-
-KeyboardAvoidingScrollView.defaultProps = {
-  dismissMode: 'none',
 };

@@ -22,6 +22,8 @@ export type TextProps = ViewProps &
 
 export const Text: React.FC<TextProps> = ({ children, style, ...props }) => (
   <BaseText
+    {...(props.onPress ? { onPress: props.onPress, suppressHighlighting: true } : {})}
+    {...(props.numberOfLines ? { numberOfLines: props.numberOfLines } : {})}
     style={[
       borderRadiusStyle(props),
       viewStyle(props),

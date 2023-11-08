@@ -3,8 +3,7 @@ import { persistReducer } from 'redux-persist';
 import { combineReducers, Action } from '@reduxjs/toolkit';
 import { RootState } from 'types';
 
-import { resetApp } from './app/actions';
-import { appReducer } from './app/slice';
+import { resetApp, appReducer } from 'features/app/slice';
 
 const rootPersistConfig = {
   key: 'root',

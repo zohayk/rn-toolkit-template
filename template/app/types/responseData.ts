@@ -1,5 +1,5 @@
-// IMPORTANT Need to write a title ...RSPT (response data types)
+// IMPORTANT Need to write a title ...RS (response)
 
-export interface ResponseErrorsRSPT {
+export interface ResponseErrorsRS {
   [key: string]: string;
 }

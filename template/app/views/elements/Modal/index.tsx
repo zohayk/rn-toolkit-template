@@ -3,18 +3,16 @@ import { StyleSheet, Pressable } from 'react-native';
 import { useSelector } from 'react-redux';
 import { View, ViewProps } from '../Views';
 import BaseModal from 'react-native-modal';
-import { ReactChildren, Any, RootState } from 'types';
+import { RootState } from 'types';
 import { ScreenWidth, ScreenHeight, isAndroid } from 'utils';
 import { theme } from 'styles';
 
-interface ModalProps extends ReactChildren, ViewProps {
+interface ModalProps extends ViewProps {
   isVisible: boolean;
   setIsVisible: (arg: boolean) => void;
   isSwipe?: boolean;
-
-  animationInTiming?: number;
-  animationIn?: Any;
-  animationOut?: Any;
+  animationIn?: 'fadeIn' | 'slideInUp';
+  animationOut?: 'fadeOut' | 'slideOutDown';
 }
 
 export const Modal: React.FC<ModalProps> = ({
@@ -22,10 +20,8 @@ export const Modal: React.FC<ModalProps> = ({
   isVisible,
   setIsVisible,
   isSwipe,
-
-  animationInTiming,
-  animationIn,
-  animationOut,
+  animationIn = 'slideInUp',
+  animationOut = 'slideOutDown',
   ...props
 }) => {
   const isLandscape = useSelector((state: RootState) => state.app.isLandscape);
@@ -40,23 +36,32 @@ export const Modal: React.FC<ModalProps> = ({
 
   const swipeConfigs = useMemo((): {} => {
     if (isSwipe) {
-      return { swipeDirection: 'down', onSwipeComplete: () => setIsVisible(false) };
+      return {
+        swipeDirection: 'down',
+        onSwipeComplete: () => setIsVisible(false),
+        // propagateSwipe: true,
+      };
     }
     return {};
   }, [isSwipe]);
+
+  const renderStyle = useMemo(() => {
+    return { zIndex: 100, margin: 0 };
+  }, []);
 
   return (
     <BaseModal
       {...swipeConfigs}
       {...widthHeightAndroid}
       statusBarTranslucent
-      style={styles.modal}
+      style={renderStyle}
       isVisible={isVisible}
-      backdropOpacity={0.3}
+      backdropOpacity={0.4}
       backdropColor={theme.colors.black}
-      animationInTiming={animationInTiming || 500}
-      animationIn={animationIn || 'fadeInUp'}
-      animationOut={animationOut || 'fadeOutDown'}
+      animationOutTiming={500}
+      animationInTiming={500}
+      animationIn={animationIn}
+      animationOut={animationOut}
       coverScreen
     >
       <View flex={1} {...props}>
@@ -66,10 +71,3 @@ export const Modal: React.FC<ModalProps> = ({
     </BaseModal>
   );
 };
-
-const styles = StyleSheet.create({
-  modal: {
-    margin: 0,
-    zIndex: 100,
-  },
-});

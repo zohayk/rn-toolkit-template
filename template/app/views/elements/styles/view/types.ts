@@ -37,6 +37,7 @@ export interface ViewProps {
   jc?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around' | 'space-evenly'; // justifyContent
   ai?: 'flex-start' | 'flex-end' | 'center' | 'stretch' | 'baseline'; // alignItems
   ta?: 'auto' | 'left' | 'right' | 'center' | 'justify'; // textAlign
+  display?: 'flex' | 'none'; // display
 
   opacity?: AnimatableNumericValue; // opacity
 }
@@ -84,6 +85,7 @@ export interface ViewStyleProps {
     | 'space-evenly';
   alignItems?: 'flex-start' | 'flex-end' | 'center' | 'stretch' | 'baseline';
   textAlign?: 'auto' | 'left' | 'right' | 'center' | 'justify';
+  display?: 'flex' | 'none';
 
   opacity?: AnimatableNumericValue;
 }

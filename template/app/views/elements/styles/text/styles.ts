@@ -1,21 +1,24 @@
 import { TextProps, TextStyleProps } from './types';
-// import { theme } from 'styles';
+import { theme } from 'styles';
 
 export const textStyle = (props: TextProps): TextStyleProps => {
   const style: TextStyleProps = {};
 
-  // style.fontFamily = theme.fonts.Regular; // Regular default
-  // style.fontWeight = '400';
-  //
-  // if (props.medium) {
-  //   style.fontFamily = theme.fonts.Medium; // Medium
-  //   style.fontWeight = '500';
-  // }
-  // if (props.bold) {
-  //   style.fontFamily = theme.fonts.Bold; // Bold
-  //   style.fontWeight = '600';
-  // }
+  style.fontFamily = theme.fonts.Regular; // Regular default
+  style.fontWeight = '400';
 
+  if (props.medium) {
+    style.fontFamily = theme.fonts.Medium; // Medium
+    style.fontWeight = '500';
+  }
+  if (props.bold) {
+    style.fontFamily = theme.fonts.Bold; // Bold
+    style.fontWeight = '700';
+  }
+
+  if (props.fontWeight !== undefined) {
+    style.fontWeight = props.fontWeight;
+  }
   if (props.fs !== undefined) {
     style.fontSize = props.fs;
   }

@@ -1,4 +1,4 @@
-import { config } from 'config';
+import config from 'config';
 import { ScreenHeight, ScreenWidth } from 'utils';
 
 const [shortDimension, longDimension] =

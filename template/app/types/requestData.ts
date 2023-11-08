@@ -1,6 +1,6 @@
-// IMPORTANT Need to write a title ...RQST (request data types)
+// IMPORTANT Need to write a title ...RQ (request)
 
-export interface LoginRQST {
+export interface LoginRQ {
   username: string;
   password: string;
 }

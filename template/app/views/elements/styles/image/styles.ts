@@ -5,8 +5,8 @@ export const imageStyle = (props: ImageProps): ImageStyleProps => {
     source: props.source,
   };
 
-  props.tc && (style.tintColor = props.tc);
-  props.rm && (style.tintColor = props.rm);
+  props.tintColor && (style.tintColor = props.tintColor);
+  props.resizeMode && (style.resizeMode = props.resizeMode);
 
   return style;
 };
