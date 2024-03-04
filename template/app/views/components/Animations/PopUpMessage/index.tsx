@@ -1,13 +1,10 @@
-import React from 'react';
-import { withSafeAreaInsets } from 'react-native-safe-area-context';
+import React, { useState, useRef, useEffect } from 'react';
 import { StyleSheet, Animated } from 'react-native';
-import { Text, TouchableView } from 'elements';
-import { moderateScale, theme } from 'styles';
+import { Text, TouchableView, View } from 'elements';
+import { EventEmitter } from 'services';
+import { moderateScale } from 'styles';
+import { useSafeArea } from 'utils';
 import config from 'config';
-
-interface PopUpMessageClassProps {
-  insets: { top: number };
-}
 
 let timeout: ReturnType<typeof setTimeout>;
 const startTimeout = (onClose: () => void): void => {
@@ -18,65 +15,61 @@ const startTimeout = (onClose: () => void): void => {
 
 const TOP = 300;
 
-export class PopUpMessageClass extends React.PureComponent<PopUpMessageClassProps> {
-  positionY = React.createRef().current as Animated.Value;
-  state = {
-    message: '',
-    isError: false,
-  };
+/**
+ * @desc This component is a duplicate of the SecondaryPopUpMessage component, no need to combine them.
+ */
+export const PopUpMessage: React.FC = React.memo(() => {
+  const { top } = useSafeArea();
+  const [data, setData] = useState({ message: '', isError: false });
+  const positionY = useRef<Animated.Value>(new Animated.Value(-TOP));
 
-  constructor(props: PopUpMessageClassProps) {
-    super(props);
+  useEffect(() => {
+    EventEmitter.once('PopUpMessage', onShow);
+  }, [top]);
 
-    this.positionY = new Animated.Value(-TOP);
-  }
+  const onShow = ({ message, isError = false }: { message: string; isError?: boolean }): void => {
+    setData({ message, isError });
 
-  onShow = (message?: string, isError?: boolean): void => {
-    this.setState({ message, isError });
-
-    this.onClose();
-    Animated.spring(this.positionY, {
-      toValue: TOP + this.props.insets.top,
+    onClose();
+    Animated.spring(positionY.current, {
+      toValue: TOP + top,
       friction: 7,
       tension: 80,
       useNativeDriver: true,
     }).start();
 
     clearTimeout(timeout);
-    startTimeout(this.onClose);
+    startTimeout(onClose);
   };
 
-  onClose = (): void => {
-    this.positionY.stopAnimation();
-    this.positionY.setValue(-TOP);
+  const onClose = (): void => {
+    positionY.current.stopAnimation();
+    positionY.current.setValue(-TOP);
   };
 
-  render(): React.ReactNode {
-    const { onClose, positionY } = this;
-    const { isError, message } = this.state;
-
-    return (
-      <Animated.View
-        style={[
-          styles.commonToastStyle,
-          {
-            backgroundColor: isError ? theme.colors.coralRed : theme.colors.pomegranate,
-            top: -TOP,
-            transform: [{ translateY: positionY }],
-          },
-        ]}
+  return (
+    <Animated.View
+      style={[
+        styles.commonToastStyle,
+        { top: -TOP, transform: [{ translateY: positionY.current }] },
+      ]}
+    >
+      <TouchableView
+        fd="row"
+        overflow="hidden"
+        ai="center"
+        ph={24}
+        pv={16}
+        activeOpacity={0.9}
+        onPress={onClose}
       >
-        <TouchableView overflow="hidden" ph={24} pv={16} activeOpacity={0.9} onPress={onClose}>
-          <Text fs={14} ta="center" color={theme.colors.white}>
-            {message}
-          </Text>
-        </TouchableView>
-      </Animated.View>
-    );
-  }
-}
-
-export const PopUpMessage = withSafeAreaInsets(PopUpMessageClass);
+        <View ml={12} flex={1} maxHeight={100}>
+          <Text fs={14}>{data.message}</Text>
+        </View>
+      </TouchableView>
+    </Animated.View>
+  );
+});
 
 const styles = StyleSheet.create({
   commonToastStyle: {

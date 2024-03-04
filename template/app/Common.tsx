@@ -1,9 +1,12 @@
 import React, { Fragment, useRef } from 'react';
-import { View, NativeTouchEvent } from 'react-native';
+import { View, NativeTouchEvent, UIManager } from 'react-native';
 import { PopUpMessage } from 'components';
 import { ReactChildren } from 'types';
-import { popUpMessageRef } from 'services';
-import { KeyboardDismiss } from 'utils';
+import { isAndroid, KeyboardDismiss } from 'utils';
+
+if (isAndroid && UIManager.setLayoutAnimationEnabledExperimental) {
+  UIManager.setLayoutAnimationEnabledExperimental(true);
+}
 
 const FLEX = 1;
 
@@ -38,7 +41,7 @@ export const Common: React.FC<ReactChildren> = ({ children }) => {
         {children}
       </View>
 
-      <PopUpMessage ref={popUpMessageRef} />
+      <PopUpMessage />
     </Fragment>
   );
 };

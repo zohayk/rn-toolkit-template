@@ -1,3 +1,3 @@
-export * from './asyncs';
+export * from './asyncCallbacks';
 export * from './helper';
 export * from './hooks';

@@ -1,4 +1,4 @@
-import { InteractionManager, Keyboard } from 'react-native';
+import { Keyboard } from 'react-native';
 import config from '../config';
 import { navigationRef } from './helper';
 
@@ -25,13 +25,8 @@ export const KeyboardDismiss = (): void => {
 export const asyncNavigate: <T>(rout: string, params?: T) => void = (rout, params) => {
   if (Keyboard.isVisible()) {
     // clearTimeout(timeout);
-    InteractionManager.runAfterInteractions(() => {
-      Keyboard.dismiss();
-      startTimeout(
-        () => navigationRef.current?.navigate(rout, params),
-        config.HIDDEN_KEYBOARD_TIME,
-      );
-    });
+    Keyboard.dismiss();
+    startTimeout(() => navigationRef.current?.navigate(rout, params), config.HIDDEN_KEYBOARD_TIME);
   } else {
     navigationRef.current?.navigate(rout, params);
   }
@@ -45,24 +40,21 @@ export const asyncNavigate: <T>(rout: string, params?: T) => void = (rout, param
 export const asyncCloseKeyboard = (callback: () => void, time?: number): void => {
   if (Keyboard.isVisible()) {
     // clearTimeout(timeout);
-    InteractionManager.runAfterInteractions(() => {
-      Keyboard.dismiss();
-      startTimeout(callback, time || config.HIDDEN_KEYBOARD_TIME);
-    });
+    Keyboard.dismiss();
+    startTimeout(callback, time || config.HIDDEN_KEYBOARD_TIME);
   } else {
     callback();
   }
 };
 /**
  * @param callback
+ * @param time
  * @desc For asynchronous keyboard opening.
  * For example: Go to the screen and first need to open the keyboard.
  */
-export const asyncOpenKeyboard = (callback: () => void): void => {
+export const asyncOpenKeyboard = (callback: () => void, time?: number): void => {
   // clearTimeout(timeout);
-  InteractionManager.runAfterInteractions(() => {
-    startTimeout(callback, config.OPEN_KEYBOARD_TIME);
-  });
+  startTimeout(callback, time || config.OPEN_KEYBOARD_TIME);
 };
 /**
  * @param callback

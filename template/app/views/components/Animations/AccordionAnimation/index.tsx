@@ -1,20 +1,23 @@
 import React, { useState } from 'react';
 import { LayoutAnimation } from 'react-native';
-import { View, Text, TouchableView, ViewProps } from 'elements';
+import { View, TouchableView, ViewProps } from 'elements';
 import { RotationAnimation } from '../RotationAnimation';
 import { ReactChildren } from 'types';
 
 interface AccordionProps extends ViewProps, ReactChildren {
-  title: string;
+  arrowColor?: string;
   touchPh?: number;
   defaultValue?: boolean;
+  headerComponent?: React.ReactElement;
+  changeState?: (arg: boolean) => void;
 }
 
 export const AccordionAnimation: React.FC<AccordionProps> = ({
   children,
-  title,
-  touchPh,
+  touchPh = 0,
   defaultValue = false,
+  headerComponent,
+  changeState,
   ...props
 }) => {
   const [open, setShow] = useState(defaultValue);
@@ -22,16 +25,15 @@ export const AccordionAnimation: React.FC<AccordionProps> = ({
   const toggleBox = (): void => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     setShow(!open);
+    changeState && changeState(!open);
   };
 
   return (
     <View {...props} overflow="hidden">
-      <TouchableView ph={touchPh || 0} onPress={toggleBox} fd="row" jc="space-between" ai="center">
-        <Text bold fs={18}>
-          {title}
-        </Text>
+      <TouchableView ph={touchPh} onPress={toggleBox} fd="row" jc="space-between" ai="center">
+        {headerComponent}
         <RotationAnimation trigger={open}>
-          <View height={20} width={20} bg="black" />
+          {/*<ArrowBottomIcon color={arrowColor} />*/}
         </RotationAnimation>
       </TouchableView>
 

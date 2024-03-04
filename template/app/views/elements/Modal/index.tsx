@@ -1,9 +1,7 @@
 import React, { useMemo } from 'react';
 import { StyleSheet, Pressable } from 'react-native';
-import { useSelector } from 'react-redux';
-import { View, ViewProps } from '../Views';
+import { ViewProps, View } from '../Views';
 import BaseModal from 'react-native-modal';
-import { RootState } from 'types';
 import { ScreenWidth, ScreenHeight, isAndroid } from 'utils';
 import { theme } from 'styles';
 
@@ -24,22 +22,22 @@ export const Modal: React.FC<ModalProps> = ({
   animationOut = 'slideOutDown',
   ...props
 }) => {
-  const isLandscape = useSelector((state: RootState) => state.app.isLandscape);
-
-  // This fixes an error that occurs due to statusBarTranslucent={true}
+  /**
+   * @const widthHeightAndroid variable fixes an error that occurs due to statusBarTranslucent={true}
+   */
   const widthHeightAndroid = useMemo(() => {
     if (isAndroid) {
       return { deviceWidth: ScreenWidth(), deviceHeight: ScreenHeight() };
     }
     return {};
-  }, [isLandscape, isAndroid]);
+  }, [isAndroid]);
 
   const swipeConfigs = useMemo((): {} => {
     if (isSwipe) {
       return {
         swipeDirection: 'down',
         onSwipeComplete: () => setIsVisible(false),
-        // propagateSwipe: true,
+        propagateSwipe: true,
       };
     }
     return {};
