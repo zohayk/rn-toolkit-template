@@ -4,3 +4,7 @@
 ```bash
 npx react-native init AppName --template https://github.com/ZoHayk/rn-toolkit-template
 ```
+
+###### react native redux toolkit template
+###### react native toolkit template
+###### rn toolkit template
