@@ -19,16 +19,17 @@ type BackgroundViewProps = ViewProps &
   AdditionProps &
   CustomImageProps;
 
-export const BackgroundView: React.FC<BackgroundViewProps> = ({ children, style, ...props }) => (
+export const BackgroundView: React.FC<BackgroundViewProps> = ({
+  children,
+  style,
+  width = '100%',
+  ...props
+}) => (
   <ImageBackground
     {...borderRadiusStyle(props)}
     {...imageStyle(props)}
-    style={[viewStyle(props), additionStyle(props), style]}
+    style={[viewStyle({ width, ...props }), additionStyle(props), style]}
   >
     <Fragment>{children}</Fragment>
   </ImageBackground>
 );
-
-BackgroundView.defaultProps = {
-  width: '100%',
-};

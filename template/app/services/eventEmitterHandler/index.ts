@@ -21,16 +21,16 @@ class EventEmitterHandler {
   //   return () => this.removeListener(event, listener);
   // }
 
-  // public removeListener(event: string, listener: Listener): void {
-  //   if (typeof this.events[event] !== 'object') {
-  //     return;
-  //   }
-  //
-  //   const idx: number = this.events[event].indexOf(listener);
-  //   if (idx > -1) {
-  //     this.events[event].splice(idx, 1);
-  //   }
-  // }
+  /**
+   * @param eventName similar for once event and unique name
+   * */
+  public removeListener(eventName: string): void {
+    if (typeof this.events[eventName] !== 'object') {
+      return;
+    }
+
+    this.events[eventName] = [];
+  }
 
   // public removeAllListeners(): void {
   //   Object.keys(this.events).forEach((event: string) =>
@@ -40,28 +40,28 @@ class EventEmitterHandler {
 
   /**
    * @desc This method calls the corresponding method
-   * @param event similar for once event and unique name
+   * @param eventName similar for once event and unique name
    * @param args Arguments that the function receives EventEmitter once Listener
    */
-  public emit(event: string, ...args: Any[]): void {
-    if (typeof this.events[event] !== 'object') {
+  public emit(eventName: string, ...args: Any[]): void {
+    if (typeof this.events[eventName] !== 'object') {
       return;
     }
 
-    [...this.events[event]].forEach(listener => listener.apply(this, args));
+    [...this.events[eventName]].forEach(listener => listener.apply(this, args));
   }
 
   /**
    * @desc This method adds the event uniquely, so there is no need to remove it in the return
-   * @param event similar for emit event and unique name
+   * @param eventName similar for emit event and unique name
    * @param listener callback function
    */
-  public once(event: string, listener: Listener): void {
-    if (typeof this.events[event] !== 'object') {
-      this.events[event] = [];
+  public once(eventName: string, listener: Listener): void {
+    if (typeof this.events[eventName] !== 'object') {
+      this.events[eventName] = [];
     }
 
-    this.events[event] = [listener];
+    this.events[eventName] = [listener];
   }
 }
 

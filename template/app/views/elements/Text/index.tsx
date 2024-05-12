@@ -20,7 +20,14 @@ export type TextProps = ViewProps &
   BaseTextProps &
   CustomTextProps;
 
-export const Text: React.FC<TextProps> = ({ children, style, ...props }) => (
+export const Text: React.FC<TextProps> = ({
+  children,
+  style,
+  fs = 16,
+  color = theme.colors.black,
+  regular = true,
+  ...props
+}) => (
   <BaseText
     {...(props.onPress ? { onPress: props.onPress, suppressHighlighting: true } : {})}
     {...(props.numberOfLines ? { numberOfLines: props.numberOfLines } : {})}
@@ -28,16 +35,10 @@ export const Text: React.FC<TextProps> = ({ children, style, ...props }) => (
       borderRadiusStyle(props),
       viewStyle(props),
       positionStyle(props),
-      textStyle(props),
+      textStyle({ fs, color, regular, ...props }),
       style,
     ]}
   >
     <Fragment>{children}</Fragment>
   </BaseText>
 );
-
-Text.defaultProps = {
-  fs: 16,
-  regular: true,
-  color: theme.colors.black,
-};

@@ -14,15 +14,15 @@ type ImageProps = ViewProps &
   BorderRadiusProps &
   CustomImageProps;
 
-export const Image: React.FC<ImageProps> = ({ style, ...props }) => (
+export const Image: React.FC<ImageProps> = ({
+  style,
+  width = '100%',
+  height = '100%',
+  ...props
+}) => (
   <BaseImage
     {...borderRadiusStyle(props)}
     {...imageStyle(props)}
-    style={[viewStyle(props), style]}
+    style={[viewStyle({ width, height, ...props }), style]}
   />
 );
-
-Image.defaultProps = {
-  width: '100%',
-  height: '100%',
-};

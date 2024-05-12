@@ -20,19 +20,16 @@ export const TouchableView: React.FC<TouchableViewProps> = ({
   onPress,
   activeOpacity = 0.7,
   disabled,
+  width = '100%',
   style,
   ...props
 }) => (
   <TouchableOpacity
     activeOpacity={activeOpacity}
-    style={[viewStyle(props), borderRadiusStyle(props), additionStyle(props), style]}
+    style={[viewStyle({ width, ...props }), borderRadiusStyle(props), additionStyle(props), style]}
     onPress={onPress}
     disabled={disabled}
   >
     <Fragment>{children}</Fragment>
   </TouchableOpacity>
 );
-
-TouchableView.defaultProps = {
-  width: '100%',
-};

@@ -19,12 +19,12 @@ export type ViewProps = CustomViewProps &
   AdditionProps &
   BaseViewProps;
 
-export const View: React.FC<ViewProps> = ({ children, style, ...props }) => (
+export const View: React.FC<ViewProps> = ({ children, style, width = '100%', ...props }) => (
   <BaseView
     {...(props.onTouchStart ? { onTouchStart: props.onTouchStart } : {})}
     style={[
       borderRadiusStyle(props),
-      viewStyle(props),
+      viewStyle({ width, ...props }),
       positionStyle(props),
       additionStyle(props),
       style,
@@ -37,7 +37,3 @@ export const View: React.FC<ViewProps> = ({ children, style, ...props }) => (
 export const MuffledView: React.FC<ViewProps> = ({ ...props }) => (
   <View {...props} onTouchStart={e => e.stopPropagation()} />
 );
-
-View.defaultProps = {
-  width: '100%',
-};

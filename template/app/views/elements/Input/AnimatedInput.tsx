@@ -126,8 +126,3 @@
 //     </View>
 //   );
 // };
-
-// AnimatedInput.defaultProps = {
-//   placeholder: '',
-//   keyboardType: 'default',
-// };

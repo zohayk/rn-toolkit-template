@@ -1,6 +1,7 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { LoginScreen } from 'views/screens/AuthStack';
+import { AppScreens } from 'types';
 
 const screenOptions = {
   headerShown: false,
@@ -13,7 +14,7 @@ const options = {
 
 const AuthStack = createNativeStackNavigator();
 export const AuthScreens = (): React.ReactElement => (
-  <AuthStack.Navigator initialRouteName="LoginScreen" screenOptions={screenOptions}>
-    <AuthStack.Screen options={options} name="LoginScreen" component={LoginScreen} />
+  <AuthStack.Navigator initialRouteName={AppScreens.Login} screenOptions={screenOptions}>
+    <AuthStack.Screen options={options} name={AppScreens.Login} component={LoginScreen} />
   </AuthStack.Navigator>
 );

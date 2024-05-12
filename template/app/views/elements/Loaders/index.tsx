@@ -9,12 +9,11 @@ export const PageLoader: React.FC = () => (
   </View>
 );
 
-export const MiniLoader: React.FC<DotIndicatorProps> = ({ ...props }) => {
-  return <DotIndicator {...props} />;
-};
-
-MiniLoader.defaultProps = {
-  color: theme.colors.black,
-  count: 3,
-  size: moderateScale(6),
+export const MiniLoader: React.FC<DotIndicatorProps> = ({
+  color = theme.colors.black,
+  count = 3,
+  size = moderateScale(6),
+  ...props
+}) => {
+  return <DotIndicator color={color} count={count} size={size} {...props} />;
 };
