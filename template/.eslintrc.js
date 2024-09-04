@@ -1,7 +1,7 @@
 module.exports = {
   root: true,
-  extends: ['@react-native', 'prettier'],
-  plugins: ['eslint-plugin-simple-import-sort', 'eslint-plugin-import'],
+  extends: ['@react-native', 'eslint-config-prettier'],
+  plugins: ['eslint-plugin-simple-import-sort', 'eslint-plugin-import', 'eslint-plugin-prettier'],
   rules: {
     // General
     'no-console': 'error',
