@@ -2,7 +2,7 @@
 
 ## Installation
 ```bash
-npx react-native init AppName --template https://github.com/ZoHayk/rn-toolkit-template
+npx @react-native-community/cli@latest init AppName --template https://github.com/ZoHayk/rn-toolkit-template
 ```
 
 ###### react native redux toolkit template
