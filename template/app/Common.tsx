@@ -11,7 +11,7 @@ if (isAndroid && UIManager.setLayoutAnimationEnabledExperimental) {
 const FLEX = 1;
 
 export const Common: React.FC<ReactChildren> = ({ children }) => {
-  const startEventRef = useRef<NativeTouchEvent>();
+  const startEventRef = useRef<NativeTouchEvent>(null);
 
   const endTouch = (arg: NativeTouchEvent): void => {
     if (startEventRef.current) {

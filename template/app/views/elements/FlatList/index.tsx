@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList as GestureBaseFlatList } from 'react-native-gesture-handler';
+// import { FlatList as GestureBaseFlatList } from 'react-native-gesture-handler';
 import {
   FlatList as BaseFlatList,
   StyleSheet,
@@ -36,25 +36,25 @@ export const FlatList: React.FC<BaseFlatListProps> = ({
   />
 );
 
-export const GestureFlatList: React.FC<BaseFlatListProps> = ({
-  showsHorizontalScrollIndicator = false,
-  showsVerticalScrollIndicator = false,
-  keyboardShouldPersistTaps = 'handled',
-  keyboardDismissMode = 'none',
-  ...props
-}) => (
-  <GestureBaseFlatList
-    showsHorizontalScrollIndicator={showsHorizontalScrollIndicator}
-    showsVerticalScrollIndicator={showsVerticalScrollIndicator}
-    keyboardShouldPersistTaps={keyboardShouldPersistTaps}
-    keyboardDismissMode={keyboardDismissMode}
-    style={styles.flatList}
-    onScrollBeginDrag={() => {
-      keyboardDismissMode === 'on-drag' && Keyboard.dismiss();
-    }}
-    {...props}
-  />
-);
+// export const GestureFlatList: React.FC<BaseFlatListProps> = ({
+//   showsHorizontalScrollIndicator = false,
+//   showsVerticalScrollIndicator = false,
+//   keyboardShouldPersistTaps = 'handled',
+//   keyboardDismissMode = 'none',
+//   ...props
+// }) => (
+//   <GestureBaseFlatList
+//     showsHorizontalScrollIndicator={showsHorizontalScrollIndicator}
+//     showsVerticalScrollIndicator={showsVerticalScrollIndicator}
+//     keyboardShouldPersistTaps={keyboardShouldPersistTaps}
+//     keyboardDismissMode={keyboardDismissMode}
+//     style={styles.flatList}
+//     onScrollBeginDrag={() => {
+//       keyboardDismissMode === 'on-drag' && Keyboard.dismiss();
+//     }}
+//     {...props}
+//   />
+// );
 
 const styles = StyleSheet.create({
   flatList: {

@@ -14,7 +14,7 @@ export const useAction = <T extends ActionCreator<Any>>(action: T): T => {
 };
 
 export const usePrevious = <T>(value: T): T | void => {
-  const ref = useRef<T>();
+  const ref = useRef<T>(undefined);
   useEffect(() => {
     ref.current = value;
   }, [value]);
