@@ -1,4 +1,4 @@
-import { getRealWindowHeight, getRealWindowWidth } from 'react-native-extra-dimensions-android';
+// import { getRealWindowHeight, getRealWindowWidth } from 'react-native-extra-dimensions-android';
 import { Platform, Dimensions, Linking } from 'react-native';
 import { ShowPopUpMessage } from 'services';
 import lodashIsEmpty from 'lodash/isEmpty';
@@ -29,8 +29,10 @@ export const handleUrl = (url: string): void => {
 };
 
 export const ScreenWidth = (): number => {
-  const width = isIOS ? Dimensions.get('window').width : getRealWindowWidth();
-  const height = isIOS ? Dimensions.get('window').height : getRealWindowHeight();
+  // const width = isIOS ? Dimensions.get('window').width : getRealWindowWidth();
+  // const height = isIOS ? Dimensions.get('window').height : getRealWindowHeight();
+  const width = Dimensions.get('window').width;
+  const height = Dimensions.get('window').height;
   if (isLandscape()) {
     if (width > height) {
       return width;
@@ -47,8 +49,10 @@ export const ScreenWidth = (): number => {
 };
 
 export const ScreenHeight = (): number => {
-  const width = isIOS ? Dimensions.get('window').width : getRealWindowWidth();
-  const height = isIOS ? Dimensions.get('window').height : getRealWindowHeight();
+  // const width = isIOS ? Dimensions.get('window').width : getRealWindowWidth();
+  // const height = isIOS ? Dimensions.get('window').height : getRealWindowHeight();
+  const width = Dimensions.get('window').width;
+  const height = Dimensions.get('window').height;
   if (isLandscape()) {
     if (width > height) {
       return height;
