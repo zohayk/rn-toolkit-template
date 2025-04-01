@@ -12,3 +12,4 @@ AppRegistry.registerComponent(appName, () => App);
 // All packages updated 31.03.2025
 // react -> react 19.0.0
 // except -> eslint 8.57.0
+// typescript -> typescript 5.5.4
